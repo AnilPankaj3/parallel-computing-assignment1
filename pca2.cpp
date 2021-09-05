@@ -18,13 +18,19 @@ int main(){
     vector<int>RBT; //for rows of transpose of the matrix B
     vector<int>VBT; //for values of transpose of the matrix B
 
-    float spA,spB;
-    time_t start, end; //syntax
-    
     srand(time(0));
+    float spA,spB;
+
+    clock_t start, end; //syntax
+    
+    
+//calculate the time of sparsity of matrix multiplication
+    start = clock(); //start calculating time from here
+
 //Processing for Matrix A
     //randomly generating sparsity for matrix A
     spA = 1+rand()%100;
+    
     cout<<"\nsparsity of spA: "<<spA<<"%"<<endl;
     
     int ra,ca;//row & col for matrix A
@@ -58,6 +64,7 @@ int main(){
 //Processing for Matrix B
     //use sparsity for matrix B
     spB = 1+rand()%100;
+    
     cout<<"\nsparsity of spB: "<<spB<<"%"<<endl;
     
     int rb,cb;//row & col for matrix B
@@ -85,11 +92,10 @@ int main(){
     for(int i=0;i<VB.size();i++){
         cout<<VB[i]<<" ";
     }
-//calculate the time of sparsity of matrix multiplication
-    time(&start); //start calculating time from here
+
 //Processing of Transpose of the matrix B
-cout<<endl;
-cout<<"\ntranspose of matrix B"<<endl;
+    cout<<endl;
+    cout<<"\ntranspose of matrix B"<<endl;
     for(int j=0;j<p;j++){
         for(int i=0;i<CB.size();i++){
             if(CB[i]==j){
@@ -122,7 +128,7 @@ cout<<"\ntranspose of matrix B"<<endl;
             }
         }
     }
-    time(&end); //stop the execution of time
+end = clock(); //stop the execution of time
 
 //Display the resultant matrix C
 cout<<endl;
@@ -140,9 +146,9 @@ cout<<"\nresultant matrix C\n";
         cout<<VC[i]<<" ";
     }
     cout<<endl;
-//calculate the total time
-    double time_taken = double(end - start);
-    cout << "\nTime taken by program is : " << fixed
+// Calculating total time taken by the program.
+    double time_taken = double(end - start) / double(CLOCKS_PER_SEC);
+    cout << "Time taken by program is : " << fixed 
          << time_taken << setprecision(5);
     cout << " sec " << endl;
 
